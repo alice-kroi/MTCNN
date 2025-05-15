@@ -1,4 +1,4 @@
-from models.modules.utils import PNet, RNet, ONet
+from models.modules.utils.net import PNet, RNet, ONet
 from models import trainer
 import os
 if __name__ == '__main__':
