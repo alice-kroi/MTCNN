@@ -13,6 +13,7 @@ datasets:
       images: "{subset}"  # 通用图片目录
       image_rule: "{subset}.txt"  # 通用图片规则
       image_format: "jpg"  # 通用图片格式
+      math_rule: "percentage"  # 通用匹配规则
       bbox_rule: "xyxy"  # 通用标注框格式
       landmark_rule: "xy"  # 通用特征点格式
       attributes_rule: "txt"  # 通用属性规则
