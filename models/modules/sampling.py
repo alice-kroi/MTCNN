@@ -39,10 +39,10 @@ class FaceDataset(Dataset):
  
         return img_tensor, category, offset
  
-    def trans(self, x):
+    def data_transforms(self,x):
         return transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize([0.5, ], [0.5, ])
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])(x)
  
 #测试是否可用

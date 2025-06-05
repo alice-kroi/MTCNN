@@ -1,0 +1,53 @@
+# 数据集通用解析配置
+datasets:
+  base:
+    # 路径模板配置（与gen_sample生成结构一致）
+    path_template:
+      root: "E:/MTCNN_Dataset/{dataset_name}/{subset}"
+      annotations:
+        positive: "positive.txt"
+        negative: "negative.txt"
+        part: "part.txt"
+    rule: 
+      annotations_rule: "{subset}.txt"  # 通用规则
+      images: "{subset}"  # 通用图片目录
+      image_rule: "{subset}.txt"  # 通用图片规则
+      image_format: "jpg"  # 通用图片格式
+      bbox_rule: "xyxy"  # 通用标注框格式
+      landmark_rule: "xy"  # 通用特征点格式
+      attributes_rule: "txt"  # 通用属性规则
+      attributes_format: "txt"  # 通用属性格式
+    
+    # 标准字段映射（与sampling.py的FaceDataset对应）
+    field_mapping:
+      image_path: 0     # 图片路径字段索引
+      bbox_x1: 1        # 标注框坐标字段索引
+      bbox_y1: 2
+      bbox_x2: 3
+      bbox_y2: 4
+      landmark: 5-14    # 特征点字段范围
+      attributes: 15    # 扩展属性起始索引
+    
+    # 数据转换配置（与FaceDataset.data_transforms对接）
+    transforms:
+      input_size: 48
+      normalization:
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+  
+  # 示例数据集声明
+  sample_dataset:
+    dataset_type: "detection"  # 支持 detection/classification
+    subsets: ["train", "valid"]
+    annotation_format: "mtcnn" # 标注格式标识
+    
+    # 自定义字段覆盖
+    field_overrides:
+      attributes: 6-10  # 按实际需求调整字段映射范围
+    
+    # 数据集特定参数
+    params:
+      iou_thresholds:
+        positive: 0.65
+        part: 0.4
+        negative: 0.1
